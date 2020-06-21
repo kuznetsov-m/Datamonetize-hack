@@ -40,7 +40,7 @@ def get_recipts_by_my_products(my_products: list):
 # ---------------------------- --- --------------------------------
 @app.route('/')
 def home():
-    return 'text'
+    return 'datamonetize-hack'
 # ---------------------------- api --------------------------------
 @app.route('/api/get_recipts_by_my_products', methods=['POST'])
 def api_get_recipts_by_my_products():
