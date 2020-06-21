@@ -6,6 +6,8 @@ from sys import argv
 import os
 import json
 
+import random
+
 from db_connector import DbConnector
 
 config = {'cloud_dir': 'cloud', 'database': 'db.db'}
@@ -25,6 +27,10 @@ db.create_recipt('Паста',
                     'Жарим фарш, и варим спагетти, все смешиваем + кетчуп! Готово!')
 
 # ---------------------------- --- --------------------------------
+def get_random_recipt():
+    recipt_id = random.choice(range(1, db.get_recipts_count() + 1))
+    return db.get_recipt_by_id(recipt_id)
+
 def get_recipts_by_my_products(my_products: list):
     recipts = []
 
@@ -41,7 +47,12 @@ def get_recipts_by_my_products(my_products: list):
 @app.route('/')
 def home():
     return 'datamonetize-hack'
+
 # ---------------------------- api --------------------------------
+@app.route('/api/get_random_recipt')
+def api_get_random_recipt():
+    return jsonify(get_random_recipt()), 201
+
 @app.route('/api/get_recipts_by_my_products', methods=['POST'])
 def api_get_recipts_by_my_products():
     if not request.json or not 'my_products' in request.json:
