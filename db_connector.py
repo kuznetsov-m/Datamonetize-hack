@@ -8,6 +8,8 @@ class DbConnector():
         self._recipts_table = 'recipts'
         self._recipts_table_row_names = ['title', 'products', 'text']
 
+        self._create_db()
+
     def create_db(self, shuld_rewrite_file=False):
         if os.path.isfile(self._db_name) and shuld_rewrite_file == True:
             try:
