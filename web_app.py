@@ -10,6 +10,9 @@ from db_connector import DbConnector
 
 config = {'cloud_dir': 'cloud', 'database': 'db.db'}
 
+if not os.path.isdir('cloud'):
+    os.mkdir('cloud')
+
 app = Flask(__name__)
 app.database = config['database']
 
