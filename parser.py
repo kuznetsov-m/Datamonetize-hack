@@ -44,7 +44,16 @@ def get_label(content):
         label = element.text
     return label
 
+def get_text(content):
+    tree = html.fromstring(content)
+
+    text = ''
+    for element in tree.xpath('//div[@class="step_n"]/p'):
+        text += element.text + ' '
+    return text
+
 # for id in range(152000, 152005):
 content = getContent(id)
 label = get_label(content)
 products = get_products(content)
+text = get_text(content)
