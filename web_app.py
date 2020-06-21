@@ -7,7 +7,6 @@ import os
 import json
 
 from db_connector import DbConnector
-from algorithm import get_recipts_by_my_products
 
 config = {'cloud_dir': 'cloud', 'database': 'db.db'}
 
@@ -21,6 +20,19 @@ db.create_recipt('Яичница',
 db.create_recipt('Паста',
                     ['спагетти', 'кетчуп', 'фарш говяжий'],
                     'Жарим фарш, и варим спагетти, все смешиваем + кетчуп! Готово!')
+
+# ---------------------------- --- --------------------------------
+def get_recipts_by_my_products(my_products: list):
+    recipts = []
+
+    for recipt_id in range(1, db.get_recipts_count() + 1):
+        recipt = db.get_recipt_by_id(recipt_id)
+        products = recipt['products'].split(',')
+
+        if set(products).issubset(my_products):
+            recipts.append(recipt)
+
+    return recipts
 
 # ---------------------------- --- --------------------------------
 @app.route('/')
